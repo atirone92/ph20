@@ -8,17 +8,27 @@ h = .01
 t_final = 10000
 #new comment to test git
 
+if(len(sys.argv) != 1):
+  #if there are command line arguments, then check to see if one of them is help
+  for i in range (len(sys.argv)):
+      if(sys.argv[i] == "help"): 
+  
+        print("Command Line arguments are: ")
+        print("1 - Compare numerical and analytic") #plot numeric vs. analytic
+        print("2 - Error vs. time for the explicit method" ) 
+        #plot the error on the explicit euler method
+        print("3 - Explicit Euler: x, v vs. t ")   
+        print("4 - Implicit Euler: x, v vs. t" )
+        print("5 - Explicit Euler in phase space")      
+        print("6 - Implicit Euler in phase space")      
+        print("7 - Symplectic Euler in phase space")      
+        print("8 - Symplectic, Implicit, and Explicit Euler methods in phase space")      
+        print("9 - Error Convergence Plot")      
+        print("10 - Error on Explicit Euler method vs. Time") 
+        exit()
+        #exit program after printing help 
 
-#if (sys.argv[1] == "help"):
-#  print("Command Line arguments are: ")
-#  print("1 - Compare numerical and analytic")
-#  print("2 - Explicit Euler: x, v vs. t ") 
-#  print("3 - Implicit Euler: x, v vs. t" )
-#  print("4 - Energy vs. time" )
-#  print("5 - Error vs. time" )
-#  print("6 - Error Convergence Plot" )
 
-a = 0
 
 def explicit_euler(x_0, v_0, h_1, t_f): 
   x = [x_0]
@@ -68,7 +78,7 @@ def symp_euler(x_0, v_0, h_1):
   x = [x_0]
   v = [v_0]
   t = [0] 
-  for i in range (0, t_final): 
+  for i in (range (0, t_final)): 
     x.append(x[i] + h_1*v[i])
     v.append(v[i] - h_1*x[i+1])
     t.append(t[i] + h_1)
@@ -96,43 +106,74 @@ for i in range(len(k)):
   x_3, v_3, t_3 = explicit_euler(1, 0, k[i], t_steps)
   x_error2, v_error2 = e_error(x_3, v_3, (t_steps +1 ), k[i])
   data.append(max(x_error2))
-if(a == 5):
-  plt.loglog(k, data)
-  plt.savefig("error_convergence.png")
+
 
 
 x_errorEx, v_errorEx = e_error(x_ex, v_ex, (t_final + 1), h)
 x_errorIm, v_errorIm = e_error(x_im, v_im, (t_final + 1), h)
 
 
-if( a == 1):
-  plt.plot(x_ex)
-  plt.plot(np.cos(t_ex))
-  plt.savefig("x_compare.png")
+if (len(sys.argv) == 1):
+  exit()
+  #quit before printing images if there are no command line arguments
 
-if (a == 2): 
-  plt.plot(t_ex, x_errorEx) 
-  plt.savefig("error_explicit.png")
+for i in range (1, len(sys.argv)): 
   
-if (a == 3): 
-  plt.plot(t_ex, x_ex)
-  plt.plot(t_ex, v_ex)
-  plt.savefig("tv_ex.png")
+  if( int(sys.argv[i]) == 1):
+    plt.plot(x_ex)
+    plt.plot(np.cos(t_ex))
+    plt.savefig("x_compare.png")
+    
+    #plot numeric vs. analytic
 
-if (a == 4):
-  plt.plot(t_im, x_im)
-  plt.plot(t_im, v_im)
-  plt.savefig("tv_ex.png")
+  if ( int(sys.argv[i]) == 2): 
+    plt.plot(t_ex, x_errorEx) 
+    plt.savefig("error_explicit.png")
+    #plot the error on the explicit euler method
+    
+  if ( int(sys.argv[i]) == 3): 
+    plt.plot(t_ex, x_ex)
+    plt.plot(t_ex, v_ex)
+    plt.savefig("xv_ex.png")
+    #plot the time and velocity for the explicit plot
+
+  if (int(sys.argv[i]) == 4):
+    plt.plot(t_im, x_im)
+    plt.plot(t_im, v_im)
+    plt.savefig("xv_im.png")
+    #plot the time vs. velocity for the implicit plot
   
-#plt.plot(t_sym, E_im)
-#plt.plot(t_im, x_im)
-#plt.plot(t_im, v_im)
-#plt.plot(x_ex, v_ex)
+  if (int(sys.argv[i]) == 5):
+    plt.plot(x_ex, v_ex)
+    plt.savefig("phase_ex.png") 
+    #plot the explicit Euler in phase space
+    
+  if (int(sys.argv[i]) == 6):
+    plt.plot(x_im, v_im)
+    plt.savefig("phase_im.png") 
+    #plot the implicit Euler in phase space
+   
+  if (int(sys.argv[i]) == 7):
+    plt.plot(x_sym, v_sym)
+    plt.savefig("phase_sym.png")
+    #plot symplectic Euler in phase space
+  
+  if (int(sys.argv[i]) == 8):
+    plt.plot(x_sym, v_sym)
+    plt.plot(x_im, v_im)
+    plt.plot(x_ex, v_ex)
+    plt.savefig("phase_all.png")
+    #plot symplectic, explicit, and implicit in phase space
+    
+  if(int(sys.argv[i]) == 9):
+    plt.loglog(k, data)
+    plt.savefig("error_convergence.png")
+    
+  if(int(sys.argv[i]) == 10):
+    plt.loglog(k, data)
+    plt.savefig("error_ex.png")
+
 #some functions to plot things
-#plt.plot(x_im, v_im)
-#plot phase space
-
-#plt.plot(x_sym, v_sym)
 
 
 
