@@ -1,10 +1,24 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 import math 
+import sys 
+from pylab import figure
 
 h = .01
 t_final = 10000
 #new comment to test git
+
+
+#if (sys.argv[1] == "help"):
+#  print("Command Line arguments are: ")
+#  print("1 - Compare numerical and analytic")
+#  print("2 - Explicit Euler: x, v vs. t ") 
+#  print("3 - Implicit Euler: x, v vs. t" )
+#  print("4 - Energy vs. time" )
+#  print("5 - Error vs. time" )
+#  print("6 - Error Convergence Plot" )
+
+a = 0
 
 def explicit_euler(x_0, v_0, h_1, t_f): 
   x = [x_0]
@@ -67,9 +81,7 @@ x_im, v_im, t_im = implicit_euler(1, 0, h)
 x_sym, v_sym, t_sym = symp_euler(1,0,h)
 
 
-plt.plot(x_ex)
-plt.plot(np.cos(t_ex))
-plt.show()
+
 E_ex = compute_energy(x_ex, v_ex)
 E_sym = compute_energy(x_sym, v_sym)
 E_im = compute_energy(x_im, v_im)
@@ -84,17 +96,35 @@ for i in range(len(k)):
   x_3, v_3, t_3 = explicit_euler(1, 0, k[i], t_steps)
   x_error2, v_error2 = e_error(x_3, v_3, (t_steps +1 ), k[i])
   data.append(max(x_error2))
-#plt.loglog(k, data)
-#plt.show()
+if(a == 5):
+  plt.loglog(k, data)
+  plt.savefig("error_convergence.png")
 
 
-x_error1, v_error2 = e_error(x_ex, v_ex, (t_final + 1), h)
+x_errorEx, v_errorEx = e_error(x_ex, v_ex, (t_final + 1), h)
 x_errorIm, v_errorIm = e_error(x_im, v_im, (t_final + 1), h)
 
-#plt.plot(t_im, x_errorIm)
-#plt.plot(t_ex, x_ex)
-#plt.plot(t_ex, v_ex)
-plt.plot(t_sym, E_im)
+
+if( a == 1):
+  plt.plot(x_ex)
+  plt.plot(np.cos(t_ex))
+  plt.savefig("x_compare.png")
+
+if (a == 2): 
+  plt.plot(t_ex, x_errorEx) 
+  plt.savefig("error_explicit.png")
+  
+if (a == 3): 
+  plt.plot(t_ex, x_ex)
+  plt.plot(t_ex, v_ex)
+  plt.savefig("tv_ex.png")
+
+if (a == 4):
+  plt.plot(t_im, x_im)
+  plt.plot(t_im, v_im)
+  plt.savefig("tv_ex.png")
+  
+#plt.plot(t_sym, E_im)
 #plt.plot(t_im, x_im)
 #plt.plot(t_im, v_im)
 #plt.plot(x_ex, v_ex)
@@ -104,8 +134,6 @@ plt.plot(t_sym, E_im)
 
 #plt.plot(x_sym, v_sym)
 
-
-plt.show()
 
 
 
