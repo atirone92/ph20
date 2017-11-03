@@ -1,0 +1,36 @@
+commit bc31d269a992c45d6a17f6c932bd26ff3ffc39e2
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Fri Nov 3 15:23:06 2017 -0600
+
+    Latex files, makefile added
+
+commit a20fe7ab7d3786ea796cd6892d8b88f13e3a0d15
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Wed Nov 1 22:14:52 2017 -0600
+
+    new version of assignment 3
+
+commit 65d8449ea2b82e4f378f16041369fb369d554235
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Wed Nov 1 19:27:54 2017 -0600
+
+    Added command line arguments
+
+commit d9e9e9f197a21e35e57a1b50e2bffc3df200b607
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Wed Nov 1 00:15:42 2017 -0600
+
+    made changes to test adding changes in git
+
+commit b68031c4dfa6e6974065914c535c50cd406f063b
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Wed Nov 1 00:07:13 2017 -0600
+
+    test
+
+commit 6562a5aecfdae108e6fa6ace4717a4aa520627d0
+Author: Alicia <alicia.tirone@gmail.com>
+Date:   Wed Nov 1 00:03:29 2017 -0600
+
+    first commit
+
